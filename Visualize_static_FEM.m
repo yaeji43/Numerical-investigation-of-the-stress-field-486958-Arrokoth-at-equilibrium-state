@@ -6,15 +6,15 @@ clc;
 
 %% ReadInput
 %% part I
-MV1 = load('node.txt')*1.e+3;
-MF1 = load('elem.txt')+1;
+MV1 = load('Shapemodel/node.txt')*1.e+3;
+MF1 = load('Shapemodel/elem.txt')+1;
 
 lenE = length(MF1);
 lenN = length(MV1);
 
 N = [3,6];  % the number of columns for each section
 H = [5,1];   % the number of header lines (note added in the trailer here
-fid=fopen('THL_Output_Low_3.txt');
+fid=fopen('Output.txt');
 % node/ stress/ disp/ mass
 % node/ stress/ den/ nodal/ mass
 
@@ -53,8 +53,7 @@ end
 
 %% Density distribution
 [F,J,T] = boundary_faces(MF1);
-% % MV = MV./1.0e+3;
-V = MV;
+V = MV./1.e+3;
 T = MF1;
 [U,G,J,~] = slice_tets(V,T,[0 1 0 1]);
 str_slice = sort_data(MF1,J,U,i1);
@@ -62,18 +61,18 @@ ystar_slice = sort_data(MF1,J,U,DPS);
 
 figure()
 h = colorbar;
-patch('Vertices',MV,'Faces',F,'FaceVertexCData',i1/1.e+3,'FaceColor','interp','EdgeColor','none');
+patch('Vertices',V,'Faces',F,'FaceVertexCData',i1/1.e+3,'FaceColor','interp','EdgeColor','none');
 axis tight
 axis equal
 axis on
 grid on
 lighting none
-zlim([floor(min(MV(:,3))) max(MV(:,3))])
-xlim([min(MV(:,1)) max(MV(:,1))])
+zlim([floor(min(V(:,3))) max(V(:,3))])
+xlim([min(V(:,1)) max(V(:,1))])
 ylabel(h, 'Normal Stress (KPa)');
-xlabel('x [m]')
-ylabel('y [m]')
-zlabel('z [m]')
+xlabel('x [km]')
+ylabel('y [km]')
+zlabel('z [km]')
 set(gca,'fontsize', 20);
 view(0,0)
 
@@ -93,18 +92,18 @@ view(0,0)
 
 figure()
 h = colorbar;
-patch('Vertices',MV,'Faces',F,'FaceVertexCData',DPS/1.e+3,'FaceColor','interp','EdgeColor','none');
+patch('Vertices',V,'Faces',F,'FaceVertexCData',DPS/1.e+3,'FaceColor','interp','EdgeColor','none');
 axis tight
 axis equal
 axis on
 grid on
 lighting none
-zlim([floor(min(MV(:,3))) max(MV(:,3))])
-xlim([min(MV(:,1)) max(MV(:,1))])
+zlim([floor(min(V(:,3))) max(V(:,3))])
+xlim([min(V(:,1)) max(V(:,1))])
 ylabel(h, 'Y^* (KPa)');
-xlabel('x [m]')
-ylabel('y [m]')
-zlabel('z [m]')
+xlabel('x [km]')
+ylabel('y [km]')
+zlabel('z [km]')
 set(gca,'fontsize', 20);
 view(0,0)
 
