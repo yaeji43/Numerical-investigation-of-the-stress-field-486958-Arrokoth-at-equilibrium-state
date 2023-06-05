@@ -26,7 +26,7 @@ void structure::allocDen(Eigen::MatrixXd& Den){
 
 void structure::exportOutput(Eigen::SparseMatrix<double> nodalSol, Eigen::MatrixXd matU){
 
-        ofstream fout1("THL_Output_Low_3.txt");
+        ofstream fout1("Output.txt");
         fout1 << "%% +++++++++++++++++++ SIMULATION INFO +++++++++++++++++++++" << endl;
         fout1 << "%% Node    number:= " << NFNODE << endl;
         fout1 << "%% Element number:= " << NFELEM << endl;
@@ -67,7 +67,7 @@ void structure::exportOutput(Eigen::SparseMatrix<double> nodalSol, Eigen::Matrix
 void structure::readInput(){
         DIM = 3;
         // Element
-        ifstream fin1("elem.txt");
+        ifstream fin1("Shapemodel/elem.txt");
         if (!fin1) {
                 cout << "ERROR: ELEMENT file cannot be opened..." << endl;
                 exit(1);
@@ -80,7 +80,7 @@ void structure::readInput(){
         fin1.close();
         NFELEM = Rows_num;
         ele.resize(Rows_num, 4); //define the size of ele matrix
-        fin1.open("elem.txt");
+        fin1.open("Shapemodel/elem.txt");
         int ii = 0;
         while(getline(fin1,stringInput)) {
                 ele(ii,0) = atoi((char*)stringInput.substr(0, 8).c_str());
@@ -92,7 +92,7 @@ void structure::readInput(){
         fin1.close();
 
         // Node
-        ifstream fin2("node.txt");
+        ifstream fin2("Shapemodel/node.txt");
         if (!fin2) {
                 cout << "ERROR: Node file cannot be opened..." << endl;
                 exit(1);
@@ -105,7 +105,7 @@ void structure::readInput(){
         fin2.close();
         NFNODE = Rows_num;
         node.resize(Rows_num, 3); //define the size of ele matrix
-        fin2.open("node.txt");
+        fin2.open("Shapemodel/node.txt");
         ii = 0;
         while(getline(fin2,stringInput)) {
                 node(ii,0) = 1.e+3*atof((char*)stringInput.substr(0, 28).c_str());
