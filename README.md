@@ -10,3 +10,14 @@ This package provides the stress field of Arrokoth at the equlibrium state which
 [1] [Yaeji Kim and Masatoshi Hirabayashi. A numerical approach using a finite element model to constrain the possible interior layout of (16) psyche. The Planetary Science Journal, 3(5):122, 2022.](https://iopscience.iop.org/article/10.3847/PSJ/ac6b39/meta) 
 
 [2] [AGU Fall Meeting 2022, held in Chicago, IL, 12-16 December 2022, id. P26A-08.](https://baas.aas.org/pub/2022n8i410p01/release/1)
+
+
+# How to run the package
+1. Run the shell script <br/>
+```./exe.sh```
+
+2. Run the generated executive file <br/>
+```./main```
+
+3. Then the output file named 'Output.txt' will be generated <br/>
+4. [Optional] You can use 'Visualize_static_FEM.m' to visuazlie the stress field of Arrokoth of the entire and sliced structure with the output file [Output.txt].
