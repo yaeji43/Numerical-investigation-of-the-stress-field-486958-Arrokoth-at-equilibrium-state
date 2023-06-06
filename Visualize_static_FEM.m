@@ -4,32 +4,24 @@ clear all;
 close all;
 clc;
 
-%% ReadInput
-%% part I
-MV1 = load('Shapemodel/node.txt')*1.e+3;
-MF1 = load('Shapemodel/elem.txt')+1;
-
-lenE = length(MF1);
+%% Section - ReadInput
+MV1 = load('Shapemodel/node.txt')*1.e+3; % Input the shape model [node]
+MF1 = load('Shapemodel/elem.txt')+1; % Inout the shape model [element]
 lenN = length(MV1);
 
 N = [3,6];  % the number of columns for each section
 H = [5,1];   % the number of header lines (note added in the trailer here
-fid=fopen('Output.txt');
-% node/ stress/ disp/ mass
-% node/ stress/ den/ nodal/ mass
-
-
+fid=fopen('Output.txt'); % Put your output file here
 for i=1:length(N)
     fmt=repmat('%f',1,N(i));  % build the format string for the number columns
     a(i)=textscan(fid,fmt,'headerlines',H(i),'Delimiter',',','collectoutput',1); % read section
 end
 fclose('all');
 
-MV = a{1};
-Stress = a{2};
-% NDPY = a{4};
+MV = a{1}; % Redefined node 
+Stress = a{2}; % Calculated stress fields
 
-%% Stress distribution
+%% Section - Yield stress calculation
 angle = 35*pi/180;
 DPS = zeros(lenN,1);
 i1 = zeros(lenN,1);
@@ -46,16 +38,13 @@ for i = 1:lenN
     j2(i) = (1/6)*((s11-s22)^2 + (s22-s33)^2 + (s33-s11)^2) + (s12^2 + s31^2 + s23^2);
     alpha = 2*sin(angle)/(sqrt(3)*(3-sin(angle)));
     DPS(i) = sqrt(3)*(3-sin(angle))*(alpha*3*i1(i) + sqrt(j2(i)))/(6*cos(angle));
-%     if DPS(i) < 0
-%         DPS(i) = 0;
-%     end
 end
 
-%% Density distribution
-[F,J,T] = boundary_faces(MF1);
+%% Section 3 - Visualization
+[F,J,T] = boundary_faces(MF1); % The function 'boundary_faces' [ref. https://github.com/alecjacobson/gptoolbox/]
 V = MV./1.e+3;
 T = MF1;
-[U,G,J,~] = slice_tets(V,T,[0 1 0 1]);
+[U,G,J,~] = slice_tets(V,T,[0 1 0 1]); % The function 'slice_tets' [ref. https://github.com/alecjacobson/gptoolbox/]
 str_slice = sort_data(MF1,J,U,i1);
 ystar_slice = sort_data(MF1,J,U,DPS);
 
@@ -122,6 +111,7 @@ set(gca,'fontsize', 20);
 view(0,0)
 end
 
+%% Section - List of local functions
 function data = sort_data(MF,J,U,NDPY)
 
 data = zeros(length(J),1);
