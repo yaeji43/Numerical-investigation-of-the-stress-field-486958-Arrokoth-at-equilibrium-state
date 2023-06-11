@@ -27,6 +27,7 @@ This package provides the stress field of Arrokoth at the equlibrium state which
 
 If you successfully run the FEM package, you will get the output file <Output.txt>. This file includes the node, stress vector, density, yield stress, and mass information on all nodes.
 
+**<Output.txt STRUCTURE LAYOUT>** <br/>
 %% +++++++++++++++++++ SIMULATION INFO +++++++++++++++++++++ <br/>
 %% Node    number:= # <br/>
 %% Element number:= # <br/>
