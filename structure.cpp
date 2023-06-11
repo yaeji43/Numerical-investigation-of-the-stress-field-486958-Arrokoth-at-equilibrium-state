@@ -51,12 +51,12 @@ void structure::exportOutput(Eigen::SparseMatrix<double> nodalSol, Eigen::Matrix
                 fout1 << Den(i) << endl;
         }
 
-        fout1 << "%% Nodal Solution =============================" << endl;
+        fout1 << "%% Yield Stress Info =============================" << endl;
         for (int i = 0; i < NFNODE; i++) {
                 fout1 << setw(15) << nodalDPY(i,0) << endl;
         }
 
-        fout1 << "%% Mass distribution =============================" << endl;
+        fout1 << "%% Mass Info =============================" << endl;
         for (int i = 0; i < NFNODE; i++) {
                 fout1 << setw(15) << mNode(i,0) << endl;
         }
