@@ -41,11 +41,11 @@ _Each row has a stress field acting on the assigned node (i) - (sigma_xx_i, sigm
 %% Density Info ============================= <br/> <br/>
 _Density data .. <br/>
 _Each row has a density value at the assigned node - (density_i) .. <br/> <br/>
-%%  Yield stress ============================= <br/> <br/>
+%%  Yield Stress Info ============================= <br/> <br/>
 _Yield stress data .. <br/>
 _Each row has the yield stress at the assigned node (i) ..  <br/>
 _The yield stress is calculated based on the drucker-prager criterion - (Yield_stress_i) ..  <br/> <br/>
-%% Mass distribution ============================= <br/> <br/>
+%% Mass Info ============================= <br/> <br/>
 _Mass data .. <br/>
 _Each row has the mass value at the assigned node (i) - (mass_i) ..  <br/>
 
